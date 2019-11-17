@@ -31,7 +31,8 @@ $query = "SELECT c.fname, c.lname, s.description
 			      JOIN stores7.orders USING(customer_num)
             JOIN stores7.items USING(order_num)
             JOIN stores7.items i USING(stock_num, manu_code)
-			      JOIN stores7.stock s using(manu_code);
+			      JOIN stores7.stock s using(manu_code)
+            JOIN stores7.manufact m using(manu_code)
             WHERE manu_name =  ";
 $query = $query.'"'.$manufacturer.'" order by c.lname;';
 
