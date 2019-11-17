@@ -26,12 +26,14 @@ $manufacturer = mysqli_real_escape_string($conn, $manufacturer);
 // this is a small attempt to avoid SQL injection
 // better to use prepared statements
 
-$query = "SELECT s.description, CONCAT('$', IFNULL(SUM(i.total_price), 0)) AS totalSpent
-FROM stores7.manufact m
-			JOIN stores7.stock s using(manu_code)
-			LEFT JOIN stores7.items i USING(stock_num, manu_code)
+$query = "SELECT c.fname, c.lname, s.description
+          FROM stores7.customer c 
+			      JOIN stores7.orders USING(customer_num)
+            JOIN stores7.items USING(order_num)
+            JOIN stores7.items i USING(stock_num, manu_code)
+			      JOIN stores7.stock s using(manu_code);
             WHERE manu_name =  ";
-$query = $query.'"'.$manufacturer.'" group by stock_num, manu_code;';
+$query = $query.'"'.$manufacturer.'" order by c.lname;';
 
 ?>
 
@@ -55,7 +57,7 @@ print "<pre>";
 while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
   {
     print "\n";
-    print "$row[description]  $row[totalSpent]";
+    print "$row[firstName]  $row[lastName] $row[description]";
   }
 print "</pre>";
 
