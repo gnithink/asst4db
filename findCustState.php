@@ -26,7 +26,7 @@ $manufacturer = mysqli_real_escape_string($conn, $manufacturer);
 // this is a small attempt to avoid SQL injection
 // better to use prepared statements
 
-$query = "SELECT c.fname, c.lname, s.description
+$query = "SELECT DISTINCT c.fname, c.lname, s.description
           FROM stores7.customer c 
 			      JOIN stores7.orders USING(customer_num)
             JOIN stores7.items USING(order_num)
