@@ -71,7 +71,7 @@ mysqli_close($conn);
 <hr>
 
 <p>
-<a href="findCustState.txt" >Contents</a>
+<a href="findCustState.php" >Contents</a>
 of the PHP program that created this page. 	 
  
 </body>
